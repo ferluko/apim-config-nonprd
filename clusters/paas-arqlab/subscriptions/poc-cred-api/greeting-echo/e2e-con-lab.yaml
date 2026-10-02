@@ -10,7 +10,7 @@ metadata:
     consumer-ns: e2e-con-lab
   annotations:
     apim.bancogalicia/approval-ref: RITM790235398495
-    secret.kuadrant.io/plan-id: bronze
+    secret.kuadrant.io/plan-id: gold
 spec:
   refreshInterval: 5m
   secretStoreRef:
@@ -29,7 +29,7 @@ spec:
           app-id: dea971da
           consumer-ns: e2e-con-lab
         annotations:
-          secret.kuadrant.io/plan-id: bronze
+          secret.kuadrant.io/plan-id: gold
           apim.bancogalicia/approval-ref: RITM790235398495
       data:
         api_key: '{{ .app_key }}'
