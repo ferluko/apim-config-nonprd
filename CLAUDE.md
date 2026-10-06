@@ -9,7 +9,7 @@ Quién escribe acá: el **API Subscriber** (`~/Documents/Galicia/mc/bgal-api-sub
 ## Árbol
 | Path | Qué | Quién escribe |
 |---|---|---|
-| `catalog/plans.yaml` | Planes válidos (`bronze`, `gold`, `no-limits`); el Subscriber rechaza otros (422) | Humano (PR) |
+| `catalog/plans.yaml` | Planes válidos (`bronze`, `gold`, `no-limits`) con su `maxTps`; el Subscriber elige el plan desde el TPS de la solicitud de ServiceNow (0.4.0) y rechaza planes fuera del catálogo (422) | Humano (PR) |
 | `clusters/<c>/apis/<api-ns>/<api-id>/v<major>/` | Publicación de la API (AuthPolicy, RLP, HTTPRoute, …). En el lab solo hay un `README.md`: la API `poc-cred-api/greeting-echo` la desplegó la PoC; la carpeta define el placement | API Publisher |
 | `clusters/<c>/subscriptions/<api-ns>/<api-id>/<consumer-ns>[--prev].yaml` | ExternalSecret de suscripción (y su `-prev` durante una rotación, fijado a una versión de Vault) | **Solo el API Subscriber** |
 | `clusters/<c>/subscriptions/README.md` | Ancla del directorio: sin él, la última baja borraría la carpeta y el ExternalSecret quedaría vivo (ADR-gitops §5.2) | Nunca se borra |

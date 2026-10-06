@@ -1,4 +1,6 @@
+# Catálogo de planes. maxTps: tope por consumidor; el API Subscriber (0.4.0+) elige el plan más chico cuyo maxTps
+# cubre el TPS de la solicitud de ServiceNow. Sin TPS, o si ninguno alcanza: no-limits (sin límite por consumidor).
 plans:
-  - id: bronze
-  - id: gold
-  - id: no-limits
+  - {id: bronze, maxTps: 5}
+  - {id: gold, maxTps: 20}
+  - {id: no-limits}
