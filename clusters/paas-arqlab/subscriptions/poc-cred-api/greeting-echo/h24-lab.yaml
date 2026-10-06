@@ -1,0 +1,40 @@
+# Generado por el API Subscriber (suscripción). No editar a mano.
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: sub-greeting-echo--h24-lab
+  namespace: apim-credentials
+  labels:
+    app.kubernetes.io/managed-by: api-subscriber
+    api-id: greeting-echo
+    consumer-ns: h24-lab
+  annotations:
+    apim.bancogalicia/approval-ref: RITM000000024003
+    secret.kuadrant.io/plan-id: bronze
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault-apim-gw-nonprd
+  target:
+    name: sub-greeting-echo--h24-lab
+    creationPolicy: Owner
+    deletionPolicy: Delete
+    template:
+      type: Opaque
+      metadata:
+        labels:
+          authorino.kuadrant.io/managed-by: authorino
+          api-id: greeting-echo
+          app-id: 6ee4cb38
+          consumer-ns: h24-lab
+        annotations:
+          secret.kuadrant.io/plan-id: bronze
+          apim.bancogalicia/approval-ref: RITM000000024003
+      data:
+        api_key: '{{ .app_key }}'
+  data:
+  - secretKey: app_key
+    remoteRef:
+      key: consumers/h24-lab/credentials
+      property: app_key
