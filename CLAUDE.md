@@ -17,6 +17,7 @@ Quién escribe acá: el **API Subscriber** (`~/Documents/Galicia/mc/bgal-api-sub
 ## Reglas
 - **No editar ni borrar a mano** archivos de `subscriptions/`: altas, cambios de plan y bajas van por la API (`POST/PATCH/DELETE /v1/subscriptions`). El Subscriber reconstruye su estado desde este repo (archivos + trailers de los commits): un cambio manual lo desincroniza de Vault y de la API Consumers.
 - Los commits del Subscriber llevan trailers (`Apim-Operation`, `Apim-Kind`, `Apim-Target`, `Idempotency-Key`, `Request-Hash`, `Rotation-Id`, `Vault-Version`, …): son su base de datos. No reescribir historia: **nunca force-push, rebase de `main` ni squash**.
+- Desde el Subscriber 0.3.0, cada operación tiene además un **commit de cierre** (`close:` o `rollback:`, trailers `Apim-Closes` y `Apim-Result`). Un `rollback:` es el Subscriber compensando un alta o un cambio de plan que no confirmó en todo el placement (borra el alta o vuelve al plan anterior): no es un cambio manual ni un error del repo.
 - Nada de secretos: los ExternalSecrets solo referencian `consumers/<ns>/credentials`; la key la baja ESO.
 - Manifiestos ya renderizados (sin Kustomize ni Helm en este repo).
 
