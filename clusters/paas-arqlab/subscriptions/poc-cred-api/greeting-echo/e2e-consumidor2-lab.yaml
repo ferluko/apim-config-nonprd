@@ -36,5 +36,5 @@ spec:
   data:
   - secretKey: app_key
     remoteRef:
-      key: consumers/e2e-consumidor2-lab/credentials
-      property: app_key
+      key: /openshift-qas/<ns de la sigla>/secret-apim-<tenant>-v2 #EJ: openshift-qas/MYSC-cyberseg-qas/secret-apim-b2c-v2
+      property: app_key_<tenant> #app_key_b2c
