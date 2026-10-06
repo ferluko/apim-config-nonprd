@@ -1,0 +1,40 @@
+# Generado por el API Subscriber (suscripción). No editar a mano.
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: sub-greeting-echo--e2e-con2-lab
+  namespace: apim-credentials
+  labels:
+    app.kubernetes.io/managed-by: api-subscriber
+    api-id: greeting-echo
+    consumer-ns: e2e-con2-lab
+  annotations:
+    apim.bancogalicia/approval-ref: RITM500524693417
+    secret.kuadrant.io/plan-id: bronze
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault-apim-gw-nonprd
+  target:
+    name: sub-greeting-echo--e2e-con2-lab
+    creationPolicy: Owner
+    deletionPolicy: Delete
+    template:
+      type: Opaque
+      metadata:
+        labels:
+          authorino.kuadrant.io/managed-by: authorino
+          api-id: greeting-echo
+          app-id: 5b72810b
+          consumer-ns: e2e-con2-lab
+        annotations:
+          secret.kuadrant.io/plan-id: bronze
+          apim.bancogalicia/approval-ref: RITM500524693417
+      data:
+        api_key: '{{ .app_key }}'
+  data:
+  - secretKey: app_key
+    remoteRef:
+      key: consumers/e2e-con2-lab/credentials
+      property: app_key
