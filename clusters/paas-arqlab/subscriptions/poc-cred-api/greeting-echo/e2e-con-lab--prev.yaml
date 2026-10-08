@@ -1,0 +1,45 @@
+# Generado por el API Subscriber (rotación (-prev)). No editar a mano.
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: sub-greeting-echo--e2e-con-lab-prev
+  namespace: apim-credentials
+  labels:
+    app.kubernetes.io/managed-by: api-subscriber
+    api-id: greeting-echo
+    consumer-ns: e2e-con-lab
+  annotations:
+    apim.bancogalicia/approval-ref: RITM478706287641
+    secret.kuadrant.io/plan-id: gold
+    apim.bancogalicia/tenant: b2c
+    apim.bancogalicia/rotation-id: 2d01971f-5161-4e0d-8582-1b5519578dbb
+    apim.bancogalicia/vault-version: '1'
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault-apim-gw-nonprd
+  target:
+    name: sub-greeting-echo--e2e-con-lab-prev
+    creationPolicy: Owner
+    deletionPolicy: Delete
+    template:
+      type: Opaque
+      metadata:
+        labels:
+          authorino.kuadrant.io/managed-by: authorino
+          api-id: greeting-echo
+          app-id: 16f0f7aa
+          consumer-ns: e2e-con-lab
+          apim.bancogalicia/rotation: prev
+        annotations:
+          secret.kuadrant.io/plan-id: gold
+          apim.bancogalicia/approval-ref: RITM478706287641
+      data:
+        api_key: '{{ .app_key }}'
+  data:
+  - secretKey: app_key
+    remoteRef:
+      key: openshift-qas/e2e-con-lab/secret-apim-b2c-v2
+      property: app_key_b2c
+      version: '1'
